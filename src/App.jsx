@@ -6,9 +6,15 @@ const App = () => {
   const [step, setStep] = useState(1);
   const [lyricIndex, setLyricIndex] = useState(-1);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false); // Untuk Loading Screen
   const audioRef = useRef(null);
 
   const myWhatsApp = "6285215128586"; 
+
+  // Fungsi untuk ngecek apakah musik sudah terload
+  const handleCanPlayThrough = () => {
+    setIsReady(true);
+  };
 
   const startExperience = () => {
     setStep(2);
@@ -23,36 +29,17 @@ const App = () => {
     window.open(`https://wa.me/${myWhatsApp}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
-useEffect(() => {
+  useEffect(() => {
     if (step === 2) {
       const timers = [
-        // Vokal 1.8 | Muncul 1.6
         setTimeout(() => setLyricIndex(0), 1800),
-        
-        // Vokal 5.5 | Muncul 5.3
         setTimeout(() => setLyricIndex(1), 5500),
-        
-        // Vokal 9.2 | Muncul 9.0
         setTimeout(() => setLyricIndex(2), 9000),
-        
-        // Vokal 14.5 | Muncul 14.3 (Set'lah sekian lama...)
         setTimeout(() => setLyricIndex(3), 14000),
-        
-        // MUNDURIN DI SINI: Vokal 18.5 | Muncul 18.2 (Terpendam jauh...)
-        // Sebelumnya 16.3, sekarang 18.2 biar lirik sebelumnya gak langsung hilang
         setTimeout(() => setLyricIndex(4), 18200),
-        
-        // Vokal 23.2 | Muncul 23.0
         setTimeout(() => setLyricIndex(5), 23000),
-        
-        // Vokal 28.8 | Muncul 28.6
         setTimeout(() => setLyricIndex(6), 28600),
-        
-        // Vokal 34.5 | Muncul 34.2 (Tanpa kehadirannya...)
-        // Gue mundurin juga biar pas sama klimaks lagunya
         setTimeout(() => setLyricIndex(7), 34200),
-        
-        // Transisi ke confess tetap di 44.0 (biar musiknya mengalun dulu)
         setTimeout(() => setStep(3), 44000),
       ];
       return () => timers.forEach(clearTimeout);
@@ -73,7 +60,34 @@ useEffect(() => {
   return (
     <div className="relative w-full h-[100dvh] bg-[#fcfbf4] overflow-hidden font-sans selection:bg-[#b5838d]/20">
       
-      <audio ref={audioRef} onEnded={() => setIsMusicPlaying(false)}>
+      {/* 1. LOADING SCREEN */}
+      <AnimatePresence>
+        {!isReady && (
+          <motion.div
+            key="loader"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-[#fcfbf4] flex flex-col items-center justify-center"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+              className="text-4xl mb-4"
+            >
+              🌸
+            </motion.div>
+            <p className="text-[#7a8d6e] text-xs tracking-[0.3em] font-bold animate-pulse">
+              TUNGGU SEBENTAR...
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <audio 
+        ref={audioRef} 
+        onCanPlayThrough={handleCanPlayThrough} // Triggers when audio is ready
+        onEnded={() => setIsMusicPlaying(false)}
+      >
         <source src="./Rio Clappy - Bunga Abadi.mp3" type="audio/mpeg" />
       </audio>
 
@@ -81,7 +95,7 @@ useEffect(() => {
         <AnimatePresence mode="wait">
           
           {/* STEP 1: LOGO SURAT */}
-          {step === 1 && (
+          {step === 1 && isReady && (
             <motion.div 
               key="start" 
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
@@ -131,7 +145,7 @@ useEffect(() => {
             </motion.div>
           )}
 
-          {/* STEP 3: FINAL CONFESSION (IKON ESTETIK) */}
+          {/* STEP 3: FINAL CONFESSION */}
           {step === 3 && (
             <motion.div
               key="final"
@@ -185,7 +199,7 @@ useEffect(() => {
         </AnimatePresence>
       </section>
 
-      {/* MINI PLAYER (DENGAN COVER ALBUM) */}
+      {/* MINI PLAYER */}
       <AnimatePresence>
         {isMusicPlaying && (
           <motion.div
@@ -194,13 +208,11 @@ useEffect(() => {
             exit={{ y: 120, x: "-50%", opacity: 0 }}
             className="fixed bottom-8 left-1/2 z-50 bg-white/90 backdrop-blur-xl p-3 pr-8 rounded-2xl border border-white shadow-[0_20px_40px_rgba(0,0,0,0.1)] flex items-center gap-4 min-w-[260px]"
           >
-            {/* Box Cover Album Art */}
             <div className="relative w-12 h-12 rounded-lg overflow-hidden shadow-md bg-[#e5e7eb] flex items-center justify-center group">
-              {/* Kamu bisa ganti src ini ke link foto album Rio Clappy asli */}
               <img 
                 src="mf.png" 
                 alt="Album Art" 
-                className="w-full h-full object-cover animate-pulse"
+                className="w-full h-full object-cover"
                 onError={(e) => { e.target.src = "https://via.placeholder.com/150?text=🌸"; }}
               />
               <div className="absolute inset-0 bg-black/10"></div>
@@ -212,7 +224,6 @@ useEffect(() => {
               <p className="text-[10px] text-[#7a8d6e] opacity-70">Rio Clappy</p>
             </div>
 
-            {/* Audio Visualizer Simple */}
             <div className="flex gap-[3px] items-end h-3 ml-auto">
                {[0.6, 1, 0.4, 0.8].map((h, i) => (
                  <motion.div 
