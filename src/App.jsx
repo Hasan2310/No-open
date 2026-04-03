@@ -24,8 +24,8 @@ const App = () => {
 
   const handleResponse = (answer) => {
     const text = answer === 'yes' 
-      ? "Iya, aku mau jadi pacar kamu! ✨🌸" 
-      : "Maaf ya, aku belum bisa... tapi makasih ya udah jujur. 🙏";
+      ? "Iya, aku mau jadi pacar kamu!" 
+      : "Maaf ya, aku belum bisa... tapi makasih ya udah jujur.";
     window.open(`https://wa.me/${myWhatsApp}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -162,7 +162,7 @@ const App = () => {
               </motion.div>
 
               <div className="space-y-6 text-[#4a5d4d] mb-12">
-                <p className="text-sm tracking-widest uppercase opacity-60">Pesan dari Hati</p>
+                <p className="text-sm tracking-widest uppercase opacity-60">Pesan dari Hasan</p>
                 <div className="h-[1px] w-12 bg-[#7a8d6e]/30 mx-auto"></div>
                 <p className="text-base leading-relaxed">
                   Cilla, maaf ya udah buat kamu nunggu. <br />
