@@ -170,52 +170,53 @@ const App = () => {
                   <div className="h-[1px] w-16 bg-[#7a8d6e]/40 mx-auto"></div>
                 </div>
 
-                {/* Content Section */}
-                <div className="space-y-6">
-                  <p className="text-base md:text-lg leading-relaxed font-light italic opacity-90">
-                    "Cilla, maaf ya udah buat kamu nunggu. <br className="hidden md:block" />
-                    Aku juga minta maaf soal yang kemarin, kita perbaikin bareng ya? <br className="hidden md:block" />
-                    Aku janji nggak gitu lagi."
+                <div className="space-y-6 text-[#4a5d4d] mb-12 text-center px-4">
+                  {/* Header */}
+                  <div className="space-y-2">
+                    <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-60">
+                      Pesan dari Hasan
+                    </p>
+                    <div className="h-[1px] w-10 bg-[#7a8d6e]/30 mx-auto"></div>
+                  </div>
+
+                  {/* Pesan Pembuka - Ukuran lebih santai di HP */}
+                  <p className="text-sm md:text-base leading-relaxed max-w-xs md:max-auto mx-auto">
+                    Cilla, maaf ya udah buat kamu nunggu. <br className="hidden md:block" />
+                    Aku juga minta maaf soal yang kemarin, kita perbaikin bareng ya? Aku janji nggak gitu lagi.
+                    Terus buat sekarang aku ga pengen kamu bingung lagi soal status kita.
                   </p>
 
-                  <p className="text-base leading-relaxed">
-                    Terus buat sekarang, aku nggak pengen kamu bingung lagi soal status kita.
-                  </p>
-                </div>
-
-                {/* Highlight Quote */}
-                <div className="py-4">
-                  <h2 className="text-xl md:text-3xl font-serif italic text-[#5a6b50] tracking-wide">
+                  {/* Quote - Dikecilkan sedikit untuk HP */}
+                  <h2 className="text-lg md:text-2xl font-serif italic text-[#5a6b50] leading-snug px-2">
                     "Aku pengen status kita lebih dari sekadar teman."
                   </h2>
+
+                  {/* Pertanyaan Inti - Skala diturunkan agar tidak menabrak pinggir layar */}
+                  <div className="mt-8 pt-6 border-t border-[#7a8d6e]/10">
+                    <h1 className="text-2xl md:text-4xl font-serif text-[#b5838d] leading-tight">
+                      Jadi Cilla, kamu mau gak <br />
+                      <span className="block mt-2">jadi pacarku?</span>
+                    </h1>
+                  </div>
                 </div>
 
-                {/* Final Question */}
-                <div className="mt-12 pt-8 border-t border-[#7a8d6e]/10">
-                  <h1 className="text-3xl md:text-5xl font-serif text-[#b5838d] leading-tight drop-shadow-sm">
-                    Jadi Cilla, kamu mau gak <br />
-                    <span className="italic">jadi pacarku?</span>
-                  </h1>
+                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+                  <motion.button
+                    whileHover={{ scale: 1.05, backgroundColor: "#6b7c5f" }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleResponse('yes')}
+                    className="px-12 py-4 bg-[#7a8d6e] text-white rounded-full font-bold shadow-[0_10px_20px_rgba(122,141,110,0.3)] transition-all"
+                  >
+                    Ya, Aku Mau ✨
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ opacity: 1 }}
+                    onClick={() => handleResponse('no')}
+                    className="text-[#7a8d6e] text-sm font-medium opacity-40 hover:underline transition-all"
+                  >
+                    Maaf, belum bisa...
+                  </motion.button>
                 </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
-                <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: "#6b7c5f" }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleResponse('yes')}
-                  className="px-12 py-4 bg-[#7a8d6e] text-white rounded-full font-bold shadow-[0_10px_20px_rgba(122,141,110,0.3)] transition-all"
-                >
-                  Ya, Aku Mau ✨
-                </motion.button>
-                <motion.button
-                  whileHover={{ opacity: 1 }}
-                  onClick={() => handleResponse('no')}
-                  className="text-[#7a8d6e] text-sm font-medium opacity-40 hover:underline transition-all"
-                >
-                  Maaf, belum bisa...
-                </motion.button>
-              </div>
             </motion.div>
           )}
 
