@@ -166,7 +166,7 @@ const App = () => {
                 <div className="h-[1px] w-12 bg-[#7a8d6e]/30 mx-auto"></div>
                 <p className="text-base leading-relaxed">
                   Cilla, maaf ya udah buat kamu nunggu. <br />
-                  Aku minta maaf soal yang tadi, kita perbaikin bareng ya? Aku janji nggak gitu lagi.
+                  Aku minta maaf soal yang kemarin, kita perbaikin bareng ya? Aku janji nggak gitu lagi.
                 </p>
                 <h2 className="text-xl md:text-2xl font-serif italic text-[#5a6b50]">
                   "Aku pengen status kita lebih dari sekadar teman."
