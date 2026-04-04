@@ -9,7 +9,7 @@ const App = () => {
   const [isReady, setIsReady] = useState(false); // Untuk Loading Screen
   const audioRef = useRef(null);
 
-  const myWhatsApp = "6285215128586"; 
+  const myWhatsApp = "6285215128586";
 
   // Fungsi untuk ngecek apakah musik sudah terload
   const handleCanPlayThrough = () => {
@@ -23,8 +23,8 @@ const App = () => {
   };
 
   const handleResponse = (answer) => {
-    const text = answer === 'yes' 
-      ? "Iya, aku mau jadi pacar kamu!" 
+    const text = answer === 'yes'
+      ? "Iya, aku mau jadi pacar kamu!"
       : "Maaf ya, aku belum bisa... tapi makasih ya udah jujur.";
     window.open(`https://wa.me/${myWhatsApp}?text=${encodeURIComponent(text)}`, '_blank');
   };
@@ -59,7 +59,7 @@ const App = () => {
 
   return (
     <div className="relative w-full h-[100dvh] bg-[#fcfbf4] overflow-hidden font-sans selection:bg-[#b5838d]/20">
-      
+
       {/* 1. LOADING SCREEN */}
       <AnimatePresence>
         {!isReady && (
@@ -83,8 +83,8 @@ const App = () => {
         )}
       </AnimatePresence>
 
-      <audio 
-        ref={audioRef} 
+      <audio
+        ref={audioRef}
         onCanPlayThrough={handleCanPlayThrough} // Triggers when audio is ready
         onEnded={() => setIsMusicPlaying(false)}
       >
@@ -93,11 +93,11 @@ const App = () => {
 
       <section className="relative flex items-center justify-center w-full h-full px-8 text-[#4a5d4d]">
         <AnimatePresence mode="wait">
-          
+
           {/* STEP 1: LOGO SURAT */}
           {step === 1 && isReady && (
-            <motion.div 
-              key="start" 
+            <motion.div
+              key="start"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
               className="text-center"
             >
@@ -115,15 +115,15 @@ const App = () => {
                 onClick={startExperience}
                 className="px-8 py-3 border-b-2 border-[#7a8d6e] text-[#7a8d6e] text-xs tracking-[0.3em] font-bold uppercase transition-all"
               >
-                Buka Pesan 
+                Buka Pesan
               </motion.button>
             </motion.div>
           )}
 
           {/* STEP 2: LIRIK */}
           {step === 2 && (
-            <motion.div 
-              key="lyrics" 
+            <motion.div
+              key="lyrics"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -20 }}
               className="w-full text-center max-w-4xl"
             >
@@ -161,19 +161,42 @@ const App = () => {
                 <span className="opacity-80">💐</span>
               </motion.div>
 
-              <div className="space-y-6 text-[#4a5d4d] mb-12">
-                <p className="text-sm tracking-widest uppercase opacity-60">Pesan dari Hasan</p>
-                <div className="h-[1px] w-12 bg-[#7a8d6e]/30 mx-auto"></div>
-                <p className="text-base leading-relaxed">
-                  Cilla, maaf ya udah buat kamu nunggu. <br />
-                  Aku minta maaf soal yang kemarin, kita perbaikin bareng ya? Aku janji nggak gitu lagi.
-                </p>
-                <h2 className="text-xl md:text-2xl font-serif italic text-[#5a6b50]">
-                  "Aku pengen status kita lebih dari sekadar teman."
-                </h2>
-                <h1 className="text-3xl md:text-5xl font-serif text-[#b5838d] mt-10 leading-tight">
-                  Jadi Cilla, kamu mau gak <br /> jadi pacarku?
-                </h1>
+              <div className="space-y-8 text-[#4a5d4d] mb-16 text-center max-w-2xl mx-auto px-4">
+                {/* Header Section */}
+                <div className="space-y-3">
+                  <p className="text-xs tracking-[0.3em] uppercase opacity-50 font-medium">
+                    Pesan dari Hasan
+                  </p>
+                  <div className="h-[1px] w-16 bg-[#7a8d6e]/40 mx-auto"></div>
+                </div>
+
+                {/* Content Section */}
+                <div className="space-y-6">
+                  <p className="text-base md:text-lg leading-relaxed font-light italic opacity-90">
+                    "Cilla, maaf ya udah buat kamu nunggu. <br className="hidden md:block" />
+                    Aku juga minta maaf soal yang kemarin, kita perbaikin bareng ya? <br className="hidden md:block" />
+                    Aku janji nggak gitu lagi."
+                  </p>
+
+                  <p className="text-base leading-relaxed">
+                    Terus buat sekarang, aku nggak pengen kamu bingung lagi soal status kita.
+                  </p>
+                </div>
+
+                {/* Highlight Quote */}
+                <div className="py-4">
+                  <h2 className="text-xl md:text-3xl font-serif italic text-[#5a6b50] tracking-wide">
+                    "Aku pengen status kita lebih dari sekadar teman."
+                  </h2>
+                </div>
+
+                {/* Final Question */}
+                <div className="mt-12 pt-8 border-t border-[#7a8d6e]/10">
+                  <h1 className="text-3xl md:text-5xl font-serif text-[#b5838d] leading-tight drop-shadow-sm">
+                    Jadi Cilla, kamu mau gak <br />
+                    <span className="italic">jadi pacarku?</span>
+                  </h1>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
@@ -203,15 +226,15 @@ const App = () => {
       <AnimatePresence>
         {isMusicPlaying && (
           <motion.div
-            initial={{ y: 120, x: "-50%", opacity: 0 }} 
-            animate={{ y: 0, x: "-50%", opacity: 1 }} 
+            initial={{ y: 120, x: "-50%", opacity: 0 }}
+            animate={{ y: 0, x: "-50%", opacity: 1 }}
             exit={{ y: 120, x: "-50%", opacity: 0 }}
             className="fixed bottom-8 left-1/2 z-50 bg-white/90 backdrop-blur-xl p-3 pr-8 rounded-2xl border border-white shadow-[0_20px_40px_rgba(0,0,0,0.1)] flex items-center gap-4 min-w-[260px]"
           >
             <div className="relative w-12 h-12 rounded-lg overflow-hidden shadow-md bg-[#e5e7eb] flex items-center justify-center group">
-              <img 
-                src="mf.png" 
-                alt="Album Art" 
+              <img
+                src="mf.png"
+                alt="Album Art"
                 className="w-full h-full object-cover"
                 onError={(e) => { e.target.src = "https://via.placeholder.com/150?text=🌸"; }}
               />
@@ -225,14 +248,14 @@ const App = () => {
             </div>
 
             <div className="flex gap-[3px] items-end h-3 ml-auto">
-               {[0.6, 1, 0.4, 0.8].map((h, i) => (
-                 <motion.div 
+              {[0.6, 1, 0.4, 0.8].map((h, i) => (
+                <motion.div
                   key={i}
                   animate={{ height: ["20%", "100%", "20%"] }}
                   transition={{ repeat: Infinity, duration: h + 0.4, delay: i * 0.1 }}
                   className="w-1 bg-[#b5838d] rounded-full"
-                 />
-               ))}
+                />
+              ))}
             </div>
           </motion.div>
         )}
