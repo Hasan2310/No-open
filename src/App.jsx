@@ -146,80 +146,76 @@ const App = () => {
           )}
 
           {/* STEP 3: FINAL CONFESSION */}
-          {step === 3 && (
-            <motion.div
-              key="final"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              className="text-center max-w-xl"
-            >
-              <motion.div
-                initial={{ opacity: 0, rotate: -10 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                transition={{ duration: 2, delay: 0.5 }}
-                className="mb-10 text-6xl"
-              >
-                <span className="opacity-80">💐</span>
-              </motion.div>
+{step === 3 && (
+  <motion.div
+    key="final"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    /* justify-center & min-h-screen memastikan konten benar-benar di tengah layar */
+    className="flex flex-col justify-center items-center min-h-[80vh] text-center px-4 max-w-xl mx-auto"
+  >
+    {/* Ikon Bunga - Margin diperkecil agar tidak mendorong teks terlalu jauh */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
+      className="mb-4 text-5xl md:text-6xl"
+    >
+      <span className="opacity-80">💐</span>
+    </motion.div>
 
-              <div className="space-y-8 text-[#4a5d4d] mb-16 text-center max-w-2xl mx-auto px-4">
-                {/* Header Section */}
-                <div className="space-y-3">
-                  <p className="text-xs tracking-[0.3em] uppercase opacity-50 font-medium">
-                    Pesan dari Hasan
-                  </p>
-                  <div className="h-[1px] w-16 bg-[#7a8d6e]/40 mx-auto"></div>
-                </div>
+    {/* Wrapper Pesan - max-h 70vh sesuai request agar tidak kepanjangan */}
+    <div className="w-full max-h-[70vh] flex flex-col justify-center space-y-4 text-[#4a5d4d]">
+      
+      {/* Header */}
+      <div className="space-y-1">
+        <p className="text-[10px] tracking-[0.2em] uppercase opacity-50 font-medium">
+          Pesan dari Hasan
+        </p>
+        <div className="h-[1px] w-12 bg-[#7a8d6e]/30 mx-auto"></div>
+      </div>
 
-                <div className="space-y-6 text-[#4a5d4d] mb-12 text-center px-4">
-                  {/* Header */}
-                  <div className="space-y-2">
-                    <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-60">
-                      Pesan dari Hasan
-                    </p>
-                    <div className="h-[1px] w-10 bg-[#7a8d6e]/30 mx-auto"></div>
-                  </div>
+      {/* Body Text - Leading snung & text-sm agar rapat di HP */}
+      <div className="space-y-3">
+        <p className="text-sm md:text-base leading-snug opacity-90 px-2">
+          Cilla, maaf ya udah buat kamu nunggu. Aku juga minta maaf soal yang kemarin. 
+          Kita perbaikin bareng ya? Aku janji nggak gitu lagi.
+        </p>
+        
+        <h2 className="text-base md:text-xl font-serif italic text-[#5a6b50] leading-tight">
+          "Aku pengen status kita lebih dari sekadar teman."
+        </h2>
+      </div>
 
-                  {/* Pesan Pembuka - Ukuran lebih santai di HP */}
-                  <p className="text-sm md:text-base leading-relaxed max-w-xs md:max-auto mx-auto">
-                    Cilla, maaf ya udah buat kamu nunggu. <br className="hidden md:block" />
-                    Aku juga minta maaf soal yang kemarin, kita perbaikin bareng ya? Aku janji nggak gitu lagi.
-                    Terus buat sekarang aku ga pengen kamu bingung lagi soal status kita.
-                  </p>
+      {/* Pertanyaan Inti */}
+      <div className="pt-2">
+        <h1 className="text-2xl md:text-4xl font-serif text-[#b5838d] leading-tight tracking-tight">
+          Jadi Cilla, kamu mau gak <br /> 
+          <span className="font-semibold italic">jadi pacarku?</span>
+        </h1>
+      </div>
+    </div>
 
-                  {/* Quote - Dikecilkan sedikit untuk HP */}
-                  <h2 className="text-lg md:text-2xl font-serif italic text-[#5a6b50] leading-snug px-2">
-                    "Aku pengen status kita lebih dari sekadar teman."
-                  </h2>
-
-                  {/* Pertanyaan Inti - Skala diturunkan agar tidak menabrak pinggir layar */}
-                  <div className="mt-8 pt-6 border-t border-[#7a8d6e]/10">
-                    <h1 className="text-2xl md:text-4xl font-serif text-[#b5838d] leading-tight">
-                      Jadi Cilla, kamu mau gak <br />
-                      <span className="block mt-2">jadi pacarku?</span>
-                    </h1>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
-                  <motion.button
-                    whileHover={{ scale: 1.05, backgroundColor: "#6b7c5f" }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleResponse('yes')}
-                    className="px-12 py-4 bg-[#7a8d6e] text-white rounded-full font-bold shadow-[0_10px_20px_rgba(122,141,110,0.3)] transition-all"
-                  >
-                    Ya, Aku Mau ✨
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ opacity: 1 }}
-                    onClick={() => handleResponse('no')}
-                    className="text-[#7a8d6e] text-sm font-medium opacity-40 hover:underline transition-all"
-                  >
-                    Maaf, belum bisa...
-                  </motion.button>
-                </div>
-            </motion.div>
-          )}
-
+    {/* Buttons - mt-8 lebih manusiawi daripada mt-12 */}
+    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 w-full">
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: "#6b7c5f" }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => handleResponse('yes')}
+        className="w-full sm:w-auto px-10 py-3 bg-[#7a8d6e] text-white rounded-full font-bold shadow-lg transition-all text-sm md:text-base"
+      >
+        Ya, Aku Mau ✨
+      </motion.button>
+      
+      <motion.button
+        onClick={() => handleResponse('no')}
+        className="text-[#7a8d6e] text-xs font-medium opacity-40 hover:opacity-100 transition-all py-2"
+      >
+        Maaf, belum bisa...
+      </motion.button>
+    </div>
+  </motion.div>
+)}
         </AnimatePresence>
       </section>
 
